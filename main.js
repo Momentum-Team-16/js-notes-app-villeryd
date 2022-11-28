@@ -35,11 +35,12 @@ form.addEventListener("submit", function (event) {
 
 
 function loadObject(objects) {
+   container.replaceChildren();
     for (let object of objects) {
       //create card for the customer
       let card = document.createElement('div');
       card.classList.add('card');
-      card.classList.add('medium');
+    
   
       //create div for customer name
       let name = document.createElement('div');
@@ -53,6 +54,16 @@ function loadObject(objects) {
       let body = document.createElement('div');
       body.classList.add('body');
       body.innerText = `${object.body}`;
+   /* let className;
+    if (obj.completed){
+        className = "completed"
+    } else {
+        className = "incomplete"
+    };
+      body.innerHTML=`
+        <h2 class=${className}>${object.title}</h2>
+        <p>${object.body}</p>
+      `*/
   
       card.appendChild(name);
       card.appendChild(body);
