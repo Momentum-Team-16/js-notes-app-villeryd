@@ -54,6 +54,22 @@ function loadObject(objects) {
       let body = document.createElement('div');
       body.classList.add('body');
       body.innerText = `${object.body}`;
+      
+      let id  = document.createElement('div');
+      id.classList.add('id');
+      id.innerText = `${object.id}`
+
+      let del = document.createElement('a');
+      del.id  = id.innerText
+      
+      del.classList.add('btn-floating', 'btn-small', 'waves-effect', 'waves-light', 'red', 'del')
+      del.innerText = 'X'
+      
+
+    
+   
+     
+    
    /* let className;
     if (obj.completed){
         className = "completed"
@@ -64,11 +80,39 @@ function loadObject(objects) {
         <h2 class=${className}>${object.title}</h2>
         <p>${object.body}</p>
       `*/
-  
+      card.appendChild(del);
       card.appendChild(name);
+      card.appendChild(id);
       card.appendChild(body);
 
   
       container.appendChild(card);
+      
     }
   }
+
+
+  container.addEventListener('click',function (event) {
+   // console.log(event.target)
+  
+    if (event.target.classList.contains('del')) {
+        console.log('success')
+       //console.log(event.target.id)
+        fetch(url + `${event.target.id}`, {
+            method: 'DELETE',
+        })
+
+        fetch(url, {
+        method: 'GET',
+        headers: {'Content-Type' : 'application/json'},
+        
+         })
+         .then((response) => {
+             return response.json();
+        })
+
+        .then((data) => {
+            loadObject(data);
+         })
+    }
+})
