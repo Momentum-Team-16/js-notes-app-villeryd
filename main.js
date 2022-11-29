@@ -3,11 +3,14 @@ let text = document.querySelector('#post');
 const url = 'http://localhost:3000/notes/'
 const container = document.querySelector('#results')
 
+
+pageLoad();
+
 form.addEventListener("submit", function (event) {
     event.preventDefault();
     
     console.log(text.value)
-
+    if (text.value !== ''){
    fetch(url, {
         method: 'POST',
         headers: {'Content-Type' : 'application/json'},
@@ -17,19 +20,9 @@ form.addEventListener("submit", function (event) {
     .then((response) => {
         return response.json();
     })
-
-    fetch(url, {
-        method: 'GET',
-        headers: {'Content-Type' : 'application/json'},
-        
-    })
-    .then((response) => {
-        return response.json();
-    })
-
-    .then((data) => {
-        loadObject(data);
-    })
+    pageLoad();
+   
+}
 
 });
 
@@ -44,7 +37,7 @@ function loadObject(objects) {
   
       //create div for customer name
       let name = document.createElement('div');
-      name.classList.add('card-title', 'h1');
+      name.classList.add('card-title');
       name.innerText = `${object.title}`;
   
       //add name and card to customer container
@@ -61,7 +54,7 @@ function loadObject(objects) {
       let del = document.createElement('a');
       del.id  = id.innerText
       
-      del.classList.add('btn-floating', 'btn-small', 'waves-effect', 'waves-light', 'red', 'del', 'right')
+      del.classList.add('btn-floating', 'btn-small', 'waves-effect', 'waves-light', 'white', 'del', 'right')
       del.innerText = 'X'
       
 
@@ -135,3 +128,18 @@ function loadObject(objects) {
          })
     }
 })
+
+function pageLoad() {
+    fetch(url, {
+        method: 'GET',
+        headers: {'Content-Type' : 'application/json'},
+        
+    })
+    .then((response) => {
+        return response.json();
+    })
+
+    .then((data) => {
+        loadObject(data);
+    })
+}
