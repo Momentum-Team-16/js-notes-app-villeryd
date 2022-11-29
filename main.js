@@ -39,13 +39,12 @@ function loadObject(objects) {
     for (let object of objects) {
       //create card for the customer
       let card = document.createElement('div');
-      card.classList.add('card');
+      card.classList.add('card', 'col', 's6');
     
   
       //create div for customer name
       let name = document.createElement('div');
-      name.classList.add('card-title');
-      name.classList.add('h1');
+      name.classList.add('card-title', 'h1');
       name.innerText = `${object.title}`;
   
       //add name and card to customer container
@@ -62,7 +61,7 @@ function loadObject(objects) {
       let del = document.createElement('a');
       del.id  = id.innerText
       
-      del.classList.add('btn-floating', 'btn-small', 'waves-effect', 'waves-light', 'red', 'del')
+      del.classList.add('btn-floating', 'btn-small', 'waves-effect', 'waves-light', 'red', 'del', 'right')
       del.innerText = 'X'
       
 
@@ -87,11 +86,31 @@ function loadObject(objects) {
 
   
       container.appendChild(card);
+
+
+      body.addEventListener('dblclick', function (event) {
+        body.contentEditable = true;
+        body.addEventListener('blur', function (event) {
+            console.log(body.innerText);
+            body.contentEditable = false;
+            fetch(url + `${id.innerText}`, {
+                method: 'PATCH',
+                headers: {'Content-Type' : 'application/json'},
+                body: JSON.stringify({'title': 'new task', 'body':`${body.innerText}` })
+                
+            })
+            .then((response) => {
+                return response.json();
+            })
+        
+        })
+        
+      })
       
     }
   }
 
-
+// create delete button
   container.addEventListener('click',function (event) {
    // console.log(event.target)
   
