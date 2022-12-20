@@ -1,0 +1,36 @@
+.card {
+    min-width: 15%; 
+    max-width: 25%;
+    margin: 1rem;
+    padding: 1%;
+
+}
+#results {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/* wlets make the delete button smaller */
+.del {
+    width: auto;
+    height: auto;
+    max-width: 12%;
+    max-height: 12%;
+    font-size: 8px;
+    line-height: inherit;
+    color: grey;
+    border: 1px thin grey;
+
+}
+
+.del:hover {
+    color: white;
+    background-color: red !important;
+}
+
+.input-field {
+    max-width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+}
